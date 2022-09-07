@@ -10,20 +10,24 @@ public class Client {
     // constructor to put ip address and port
     public Client(String address, int port) {
         // establish a connection
+
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
 
-            // takes input from terminal
+            // takes input from terminal, this needs to be changed to input from the GUI
             input = new DataInputStream(System.in);
 
-            // sends output to the socket
+            // sends output to the socket, this needs to be translated back to a list /
+            // array and set into the GUI or terminal
             out = new DataOutputStream(socket.getOutputStream());
         } catch (UnknownHostException u) {
-            System.out.println(u);
+            System.out.println("Unknown host,zet je internet effe aan ofzo");
         } catch (IOException i) {
-            System.out.println(i);
+            System.out.println("There is a failure during reading, writing");
         }
+        ClientGUI CAL = new ClientGUI();
+        CAL.ShowGUI();
 
         // string to read message from input
         String line = "";
@@ -37,8 +41,11 @@ public class Client {
                 System.out.println(i);
             }
         }
+        close();
+    }
 
-        // close the connection
+    // close the connection
+    public void close() {
         try {
             input.close();
             out.close();
@@ -46,9 +53,5 @@ public class Client {
         } catch (IOException i) {
             System.out.println(i);
         }
-    }
-
-    public static void main(String args[]) {
-        Client client = new Client("127.0.0.1", 5000);
     }
 }

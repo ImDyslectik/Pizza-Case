@@ -15,15 +15,18 @@ public class Server {
             System.out.println("Server Booting Up");
 
             socket = server.accept();
-            System.out.println("Client Connected");
+            System.out.println("Connected Succesfull");
 
             // takes input from the client terminal and prints it into the server terminal
             in = new DataInputStream(
                     new BufferedInputStream(socket.getInputStream()));
 
+            // make a kewl Jframe
+            ServerGUI CAL = new ServerGUI();
+            CAL.ShowGUI();
             String line = "";
 
-            while (!line.equals("true")) {
+            while (!line.equals("exit")) {
                 try {
                     line = in.readUTF();
                     System.out.println(line);
@@ -32,17 +35,20 @@ public class Server {
                     System.out.println(i);
                 }
             }
+            close();
             System.out.println("Closing connection");
-
-            // close socket, terminating the connection
-            socket.close();
-            in.close();
         } catch (IOException i) {
-            System.out.println(i);
+            System.out.println("There is a failure during reading, writing");
         }
     }
 
-    public static void main(String args[]) {
-        Server server = new Server(5000);
+    // close socket, terminating the connection
+    public void close() {
+        try {
+            in.close();
+            socket.close();
+        } catch (IOException i) {
+            System.out.println(i);
+        }
     }
 }
