@@ -1,20 +1,22 @@
+import java.util.ArrayList;
+
 public class Order {
     private String name;
+    private int pizzaNum;
 
-    public Order(String name) {
+    ArrayList<Ingredients> orderlist = new ArrayList<>();
+
+    // makes an order with just name pizza amount and date for debug reasons
+
+    public Order(String name, int pizzaNum) {
         this.name = name;
+        this.pizzaNum = pizzaNum;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
+    // we will need to convert it to a string so we can add it to our arraylist
+    // (or whatever kind of list we end up using)
     @Override
     public String toString() {
-        return "Person =[" + "id=" + ", name='" + name + '\'' + ']';
+        return name + pizzaNum;
     }
 }

@@ -1,7 +1,9 @@
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-
 import javax.swing.*;
+
+//negeer deze file maar kevin
+//was gewoon rond aan het kloten
 
 public class ArrowKeys {
     boolean ExitApp = false;

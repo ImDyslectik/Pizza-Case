@@ -14,6 +14,8 @@ public class ClientGUI {
         frame.setSize(400, 400);
         frame.setFocusable(true);
 
+        Order lol = new Order("funny", 0);
+
         JPanel panel = new JPanel();
         JLabel Exit = new JLabel();
         panel.add(Exit);
@@ -22,13 +24,7 @@ public class ClientGUI {
     }
 
     public void Display() {
-        Order person = new Order("James");
-        Order person2 = new Order("Lana");
-        Order person3 = new Order("Melissa");
-        Order person4 = new Order("Ryan");
-        Order person5 = new Order("Liana");
-
-        // LinkedList<Ingredients> toppings = new LinkedList<Ingredients>();
+        // idk what this is
 
     }
 }

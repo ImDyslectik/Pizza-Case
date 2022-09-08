@@ -18,7 +18,8 @@ public class Client {
             // takes input from terminal, this needs to be changed to input from the GUI
             input = new DataInputStream(System.in);
 
-            // sends output to the socket, this needs to be translated back to a list /
+            // sends output to the socket,
+            // TODO this needs to be translated back to a list /
             // array and set into the GUI or terminal
             out = new DataOutputStream(socket.getOutputStream());
         } catch (UnknownHostException u) {
@@ -32,8 +33,8 @@ public class Client {
         // string to read message from input
         String line = "";
 
-        // keep reading until "Over" is input
-        while (!line.equals("Over")) {
+        // keep reading until "Exit" is typed
+        while (!line.equals("exit")) {
             try {
                 line = input.readLine();
                 out.writeUTF(line);
