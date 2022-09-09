@@ -26,8 +26,14 @@ public class Client {
         } catch (IOException i) {
             System.out.println("There is a failure during reading, writing");
         }
-        ClientGUI CAL = new ClientGUI();
-        CAL.ShowGUI();
+        // ClientGUI CAL = new ClientGUI();
+        // CAL.ShowGUI();
+
+        OrderManager bestel = new OrderManager();
+        String[] get = bestel.getOrder();
+        for (String or : get) {
+            System.out.println(or);
+        }
 
         // string to read message from input
         String line = "";

@@ -22,8 +22,9 @@ public class Server {
                     new BufferedInputStream(socket.getInputStream()));
 
             // make a kewl Jframe
-            ServerGUI CAL = new ServerGUI();
-            CAL.ShowGUI();
+            // ServerGUI CAL = new ServerGUI();
+            // CAL.ShowGUI();
+            InputValidationPattern lol = new InputValidationPattern();
             String line = "";
 
             while (!line.equals("exit")) {
