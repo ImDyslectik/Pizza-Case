@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.LinkedList;
 import java.io.*;
 
 public class Client {
@@ -29,11 +30,12 @@ public class Client {
         // ClientGUI CAL = new ClientGUI();
         // CAL.ShowGUI();
 
-        OrderManager bestel = new OrderManager();
-        String[] get = bestel.getOrder();
-        for (String or : get) {
-            System.out.println(or);
-        }
+        // OrderManager bestel = new OrderManager();
+        // bestel.Bestel();
+        // LinkedList<String> get = bestel.getOrder();
+        // for (String or : get) {
+        // System.out.println(or);
+        // }
 
         // string to read message from input
         String line = "";

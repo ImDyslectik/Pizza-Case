@@ -1,4 +1,5 @@
 import java.net.*;
+import java.util.LinkedList;
 import java.io.*;
 
 public class Server {
@@ -12,7 +13,7 @@ public class Server {
         // starts server and waits for a connection with the client
         try {
             server = new ServerSocket(port);
-            System.out.println("Server Booting Up");
+            System.out.println("Server Booting Up Awaiting Connection");
 
             socket = server.accept();
             System.out.println("Connected Succesfull");
@@ -24,7 +25,12 @@ public class Server {
             // make a kewl Jframe
             // ServerGUI CAL = new ServerGUI();
             // CAL.ShowGUI();
-            InputValidationPattern lol = new InputValidationPattern();
+
+            // OrderManager bestel = new OrderManager();
+            // LinkedList<String> get = bestel.getOrder();
+            // for (String or : get) {
+            // System.out.println(or);
+            // }
             String line = "";
 
             while (!line.equals("exit")) {
