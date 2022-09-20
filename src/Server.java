@@ -1,13 +1,16 @@
 import java.net.*;
 import java.util.LinkedList;
 import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 
 public class Server {
     // initialize socket and input stream
     private Socket socket = null;
     private ServerSocket server = null;
     private DataInputStream in = null;
-
+    LinkedList<String> orders = new LinkedList<>();
     // constructor with a starting port to initialize the server :) :) :)
     public Server(int port) {
         // starts server and waits for a connection with the client
@@ -19,28 +22,15 @@ public class Server {
             System.out.println("Connected Succesfull");
 
             // takes input from the client terminal and prints it into the server terminal
-            in = new DataInputStream(
-                    new BufferedInputStream(socket.getInputStream()));
-
-            // make a kewl Jframe
-            // ServerGUI CAL = new ServerGUI();
-            // CAL.ShowGUI();
-
-            // OrderManager bestel = new OrderManager();
-            // LinkedList<String> get = bestel.getOrder();
-            // for (String or : get) {
-            // System.out.println(or);
-            // }
-            String line = "";
-
-            while (!line.equals("exit")) {
-                try {
-                    line = in.readUTF();
-                    System.out.println(line);
-
-                } catch (IOException i) {
-                    System.out.println(i);
-                }
+            InputStream inputStream = socket.getInputStream();
+            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+            try {
+                orders = (LinkedList<String>) objectInputStream.readObject();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
+            }
+            for (String or : orders) {
+                System.out.println(or);
             }
             close();
             System.out.println("Closing connection");

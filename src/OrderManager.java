@@ -21,14 +21,7 @@ class OrderManager {
     Toppings topping = new Toppings();
     LinkedList<String> compoundresult = new LinkedList<>();
 
-    public static void main(String[] args) {
-        OrderManager bestel = new OrderManager();
-        bestel.Bestel();
-        LinkedList<String> get = bestel.getOrder();
-        for (String or : get) {
-            System.out.println(or);
-        }
-    }
+   
 
     public void Bestel() {
         try (Scanner myInput = new Scanner(System.in)) {

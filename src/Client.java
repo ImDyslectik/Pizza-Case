@@ -15,40 +15,21 @@ public class Client {
         try {
             socket = new Socket(address, port);
             System.out.println("Connected");
-
+            OrderManager MyOrder = new OrderManager();
+            MyOrder.Bestel();
+            LinkedList<String> get = MyOrder.getOrder();
             // takes input from terminal, this needs to be changed to input from the GUI
-            input = new DataInputStream(System.in);
-
-            // sends output to the socket, this needs to be translated back to a list /
-            // array and set into the GUI or terminal
-            out = new DataOutputStream(socket.getOutputStream());
+            
+            OutputStream outputStream = socket.getOutputStream();
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
+            
+            objectOutputStream.writeObject(get);
         } catch (UnknownHostException u) {
             System.out.println("Unknown host,zet je internet effe aan ofzo");
         } catch (IOException i) {
             System.out.println("There is a failure during reading, writing");
         }
-        // ClientGUI CAL = new ClientGUI();
-        // CAL.ShowGUI();
 
-        // OrderManager bestel = new OrderManager();
-        // bestel.Bestel();
-        // LinkedList<String> get = bestel.getOrder();
-        // for (String or : get) {
-        // System.out.println(or);
-        // }
-
-        // string to read message from input
-        String line = "";
-
-        // keep reading until "Over" is input
-        while (!line.equals("Over")) {
-            try {
-                line = input.readLine();
-                out.writeUTF(line);
-            } catch (IOException i) {
-                System.out.println(i);
-            }
-        }
         close();
     }
 
