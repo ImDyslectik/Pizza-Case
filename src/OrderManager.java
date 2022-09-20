@@ -23,6 +23,7 @@ class OrderManager {
 
     public static void main(String[] args) {
         OrderManager bestel = new OrderManager();
+        bestel.Bestel();
         LinkedList<String> get = bestel.getOrder();
         for (String or : get) {
             System.out.println(or);
@@ -57,8 +58,19 @@ class OrderManager {
         // String bestelling[] = { naam, pizza };
 
         LinkedList<String> Gegevens = new LinkedList<String>();
-        Gegevens.addLast(Name + "\n" + StreetName + "\n" + PostalAdress + "\n" + compoundresult.get(0) + "\n"
-                + PizzaAmount + "\n" + dtf.format(Date) + "\n");
+        Gegevens.addLast(Name + "\n" + StreetName + "\n" + PostalAdress + "\n" + compoundresult.get(0) + "\n" + PizzaAmount);
+        boolean first = true;
+        int toppingcounter = 0;
+        for (String order : compoundresult) {
+           if(first == true){
+            first = false;
+           }
+           else{
+            Gegevens.addLast(order);
+            toppingcounter++;
+           }
+        }
+        Gegevens.addLast(toppingcounter+"\n" + dtf.format(Date) + "\n");
         return Gegevens;
          }
 }
