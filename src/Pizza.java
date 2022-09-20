@@ -1,7 +1,7 @@
 import java.util.LinkedList;
 import java.util.Scanner;
 public class Pizza extends PizzaSet {
-    String[] types = {"Margherita", "Pepperoni","Hawaii","Tonno"};
+    String[] types = {"Margherita", "Pepperoni","Hawaii","Tonno","Hot and spicy","Ham","Cappres","BBQ chicken","Veggie","Deeg" };
     LinkedList<String> Mypizza = new LinkedList<>();
     public Pizza(){
     

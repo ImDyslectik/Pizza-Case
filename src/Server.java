@@ -14,6 +14,7 @@ public class Server {
     // constructor with a starting port to initialize the server :) :) :)
     public Server(int port) {
         // starts server and waits for a connection with the client
+        
         try {
             server = new ServerSocket(port);
             System.out.println("Server Booting Up Awaiting Connection");

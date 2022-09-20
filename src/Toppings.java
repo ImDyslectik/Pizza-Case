@@ -2,7 +2,7 @@ import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Toppings extends PizzaSet {
-    String[] types = { "Kaas", "Mozzerela", "Pepperoni", "Tonijn", "Ui", "saus" };
+    String[] types = { "Kaas", "Mozzerela", "Pepperoni", "Tonijn", "Ui", "Tomaten saus", "Pepers", "Ham", "Kip" };
     LinkedList<String> MyToppings = new LinkedList<>();
 
     public Toppings() {
