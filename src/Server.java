@@ -10,8 +10,9 @@ public class Server {
     private DataInputStream in = null;
     LinkedList<String> orders = new LinkedList<>();
 
+    // constructor for the singleton
+    // starts server and waits for a connection with the client
     public Server(int port) {
-        // starts server and waits for a connection with the client
         try {
             server = new ServerSocket(port);
             System.out.println("Server Booting Up Awaiting Connection");
@@ -37,19 +38,10 @@ public class Server {
         }
     }
 
-    // constructor for the singleton, also put a thread sleep for the boot up
-    private Server() {
-        try {
-            Thread.sleep(100);
-        } catch (InterruptedException ex) {
-            ex.printStackTrace();
-        }
-    }
-
     // creates an instance of a server to initialize once because of the singelton
-    public static Server getInstance() {
+    public static Server getInstance(int port) {
         if (instance == null) {
-            instance = new Server();
+            instance = new Server(port);
         }
         return instance;
     }
