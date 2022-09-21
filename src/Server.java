@@ -14,27 +14,35 @@ public class Server {
     // starts server and waits for a connection with the client
     public Server(int port) {
         try {
-            server = new ServerSocket(port);
-            System.out.println("Server Booting Up Awaiting Connection");
 
-            socket = server.accept();
-            System.out.println("Connected Succesfull");
+            while (true) {
+                server = new ServerSocket(port);
+                System.out.println("Server Booting Up Awaiting Connection");
 
-            // takes input from the client terminal and prints it into the server terminal
-            InputStream inputStream = socket.getInputStream();
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-            try {
-                orders = (LinkedList<String>) objectInputStream.readObject();
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
+                socket = server.accept();
+                System.out.println("Connected Succesfull");
+
+                // takes input from the client terminal and prints it into the server terminal
+                InputStream inputStream = socket.getInputStream();
+                ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
+                try {
+                    orders = (LinkedList<String>) objectInputStream.readObject();
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                }
+                for (String or : orders) {
+                    System.out.println(or);
+                }
             }
-            for (String or : orders) {
-                System.out.println(or);
-            }
-            close();
-            System.out.println("Closing connection");
         } catch (IOException i) {
             System.out.println("There is a failure during reading, writing");
+        } finally {
+            try {
+                in.close();
+                socket.close();
+            } catch (IOException i) {
+                System.out.println(i);
+            }
         }
     }
 
@@ -48,11 +56,6 @@ public class Server {
 
     // close socket, terminating the connection
     public void close() {
-        try {
-            in.close();
-            socket.close();
-        } catch (IOException i) {
-            System.out.println(i);
-        }
+
     }
 }

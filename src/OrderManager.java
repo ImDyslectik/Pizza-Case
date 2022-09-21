@@ -21,8 +21,6 @@ class OrderManager {
     Toppings topping = new Toppings();
     LinkedList<String> compoundresult = new LinkedList<>();
 
-   
-
     public void Bestel() {
         try (Scanner myInput = new Scanner(System.in)) {
             InputValidationPattern Input = new InputValidationPattern();
@@ -48,22 +46,20 @@ class OrderManager {
     }
 
     public LinkedList<String> getOrder() {
-        // String bestelling[] = { naam, pizza };
-
         LinkedList<String> Gegevens = new LinkedList<String>();
-        Gegevens.addLast(Name + "\n" + StreetName + "\n" + PostalAdress + "\n" + compoundresult.get(0) + "\n" + PizzaAmount);
+        Gegevens.addLast(
+                Name + "\n" + StreetName + "\n" + PostalAdress + "\n" + compoundresult.get(0) + "\n" + PizzaAmount);
         boolean first = true;
         int toppingcounter = 0;
         for (String order : compoundresult) {
-           if(first == true){
-            first = false;
-           }
-           else{
-            Gegevens.addLast(order);
-            toppingcounter++;
-           }
+            if (first == true) {
+                first = false;
+            } else {
+                Gegevens.addLast(order);
+                toppingcounter++;
+            }
         }
-        Gegevens.addLast(toppingcounter+"\n" + dtf.format(Date) + "\n");
+        Gegevens.addLast(toppingcounter + "\n" + dtf.format(Date) + "\n");
         return Gegevens;
-         }
+    }
 }
