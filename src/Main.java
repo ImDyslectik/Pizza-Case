@@ -11,10 +11,7 @@ public class Main {
         int Port = 5555;
 
         if (isServer == true) {
-            Server server = new Server(Port);
-
-            // make instance of a server window or GUI and do the same for client
-            // why doesn't this work atm ??
+            Server socketServer = Server.getInstance();
 
         } else {
 

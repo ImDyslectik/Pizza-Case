@@ -1,20 +1,17 @@
-import java.net.*;
 import java.util.LinkedList;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 public class Server {
-    // initialize socket and input stream
+    private static Server instance;
     private Socket socket = null;
     private ServerSocket server = null;
     private DataInputStream in = null;
     LinkedList<String> orders = new LinkedList<>();
-    // constructor with a starting port to initialize the server :) :) :)
+
     public Server(int port) {
         // starts server and waits for a connection with the client
-        
         try {
             server = new ServerSocket(port);
             System.out.println("Server Booting Up Awaiting Connection");
@@ -38,6 +35,23 @@ public class Server {
         } catch (IOException i) {
             System.out.println("There is a failure during reading, writing");
         }
+    }
+
+    // constructor for the singleton, also put a thread sleep for the boot up
+    private Server() {
+        try {
+            Thread.sleep(100);
+        } catch (InterruptedException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    // creates an instance of a server to initialize once because of the singelton
+    public static Server getInstance() {
+        if (instance == null) {
+            instance = new Server();
+        }
+        return instance;
     }
 
     // close socket, terminating the connection
