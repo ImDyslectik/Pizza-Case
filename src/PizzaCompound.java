@@ -9,6 +9,9 @@ public class PizzaCompound extends PizzaSet {
     public void add(PizzaSet component){
         children.add(component); 
     }
+    public List<PizzaSet> getchildren(){
+        return this.children;
+    }
     public LinkedList getContent(){
         LinkedList<String> result = new LinkedList<String>();
         LinkedList<String> data;

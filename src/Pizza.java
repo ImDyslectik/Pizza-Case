@@ -4,7 +4,6 @@ public class Pizza extends PizzaSet {
     String[] types = {"Margherita", "Pepperoni","Hawaii","Tonno","Hot and spicy","Ham","Cappres","BBQ chicken","Veggie","Deeg" };
     LinkedList<String> Mypizza = new LinkedList<>();
     public Pizza(){
-    
     }
     public String[] getAlltypes(){
         return types;
@@ -13,20 +12,9 @@ public class Pizza extends PizzaSet {
         Mypizza.add(Order) ;
     }
     public LinkedList getChoice(){
-
         return Mypizza;
     } 
-
-    public void ordering(){
-        String[] Pizzalist = this.getAlltypes();
-        int i = 0;
-        for (String pizza : Pizzalist) {
-            System.out.println(i + "=" +pizza);
-            i++;
-        }
-        System.out.println("voer het nummer in van de pizza die u wilt:");
-        Scanner myInput = new Scanner( System.in );
-        int input = myInput.nextInt();
-        this.setChoice(Pizzalist[input]);
+    public void accept(Visitor visitor){
+        visitor.visitPizza(this);
     }
 }

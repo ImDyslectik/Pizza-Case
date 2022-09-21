@@ -15,7 +15,7 @@ class OrderManager {
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     LocalDateTime Date = LocalDateTime.now();
     Console cnsl = System.console();
-
+    OrderingVisitor visitor = new OrderingVisitor();
     Pizza pizzaorder = new Pizza();
     PizzaCompound compound = new PizzaCompound();
     Toppings topping = new Toppings();
@@ -27,10 +27,9 @@ class OrderManager {
         try (Scanner myInput = new Scanner(System.in)) {
             InputValidationPattern Input = new InputValidationPattern();
             boolean IsValid = true;
-            pizzaorder.ordering();
-            topping.ordering();
             compound.add(pizzaorder);
             compound.add(topping);
+            visitor.getOrder(compound);
             compoundresult = compound.getContent();
             do {
                 System.out.println("Enter Name : ");

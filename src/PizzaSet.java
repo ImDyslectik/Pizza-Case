@@ -12,7 +12,7 @@ public class PizzaSet{
     public LinkedList getChoice(){
         return error2;
     } 
-    public void ordering(){
+    public void accept(Visitor visitor){
         
     }
 }
