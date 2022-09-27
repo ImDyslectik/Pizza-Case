@@ -18,11 +18,12 @@ public class Client {
                 OrderManager MyOrder = new OrderManager();
                 MyOrder.Bestel();
                 LinkedList<String> get = MyOrder.getOrder();
+                LinkedList<String> message = encrypter.encrypt(get);
                 // takes input from terminal, this needs to be changed to input from the GUI
 
                 OutputStream outputStream = socket.getOutputStream();
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
-                objectOutputStream.writeObject(get);
+                objectOutputStream.writeObject(message);
             }
         } catch (UnknownHostException u) {
             System.out.println("Unknown host,zet je internet effe aan ofzo");

@@ -9,6 +9,7 @@ public class Server {
     private ServerSocket server = null;
     private DataInputStream in = null;
     LinkedList<String> orders = new LinkedList<>();
+    LinkedList<String> message = new LinkedList<>();
 
     // constructor for the singleton
     // starts server and waits for a connection with the client
@@ -26,9 +27,13 @@ public class Server {
                 InputStream inputStream = socket.getInputStream();
                 ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
                 try {
-                    orders = (LinkedList<String>) objectInputStream.readObject();
+                    message = (LinkedList<String>) objectInputStream.readObject();
+                    orders = encrypter.decrypt(message);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
+                }
+                for (String enc : message) {
+                    System.out.println(enc);
                 }
                 for (String or : orders) {
                     System.out.println(or);
