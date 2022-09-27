@@ -1,31 +1,39 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import Compound.Pizza;
+import Compound.PizzaCompound;
+import Compound.PizzaSet;
+import Compound.Toppings;
+import Compound.Visitor;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+
 public class OrderingVisitor implements Visitor {
 
-    public void getOrder(PizzaCompound compound){
+    public void getOrder(PizzaCompound compound) {
         List<PizzaSet> children = compound.getchildren();
         for (PizzaSet child : children) {
             child.accept(this);
         }
     }
 
-    public void visitPizza(Pizza pizza){
-       String[] Pizzalist = pizza.getAlltypes();
+    public void visitPizza(Pizza pizza) {
+        String[] Pizzalist = pizza.getAlltypes();
         int i = 0;
         for (String pizzas : Pizzalist) {
-            System.out.println(i + "=" +pizzas);
+            System.out.println(i + "=" + pizzas);
             i++;
         }
         System.out.println("voer het nummer in van de pizza die u wilt:");
-        Scanner myInput = new Scanner( System.in );
+        Scanner myInput = new Scanner(System.in);
         int input = myInput.nextInt();
         pizza.setChoice(Pizzalist[input]);
     }
 
-    public void visitTopping(Toppings topping){
+    public void visitTopping(Toppings topping) {
         String[] Toppinglist = topping.getAlltypes();
         int count = 0;
         Boolean WantTopping = true;

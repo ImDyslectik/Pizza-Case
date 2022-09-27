@@ -1,3 +1,5 @@
+package Compound;
+
 import java.util.LinkedList;
 import java.util.Scanner;
 
@@ -21,8 +23,9 @@ public class Toppings extends PizzaSet {
 
         return MyToppings;
     }
-    public void accept(Visitor visitor){
+
+    public void accept(Visitor visitor) {
         visitor.visitTopping(this);
     }
-   
+
 }
