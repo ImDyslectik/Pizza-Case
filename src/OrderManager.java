@@ -53,8 +53,13 @@ class OrderManager {
 
     public LinkedList<String> getOrder() {
         LinkedList<String> Gegevens = new LinkedList<String>();
-        Gegevens.addLast(
-                Name + "\n" + StreetName + "\n" + PostalAdress + "\n" + compoundresult.get(0) + "\n" + PizzaAmount);
+        // Gegevens.addLast(
+                // Name + "\n" + StreetName + "\n" + PostalAdress + "\n" + compoundresult.get(0) + "\n" + PizzaAmount);
+        Gegevens.addLast(Name);
+        Gegevens.addLast(StreetName);
+        Gegevens.addLast(PostalAdress);
+        Gegevens.addLast(compoundresult.get(0));
+        Gegevens.addLast(""+PizzaAmount);
         boolean first = true;
         int toppingcounter = 0;
         for (String order : compoundresult) {
@@ -65,7 +70,8 @@ class OrderManager {
                 toppingcounter++;
             }
         }
-        Gegevens.addLast(toppingcounter + "\n" + dtf.format(Date) + "\n");
+        Gegevens.addLast(""+toppingcounter);
+        Gegevens.addLast(dtf.format(Date));
         return Gegevens;
     }
 }

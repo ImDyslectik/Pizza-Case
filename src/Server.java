@@ -28,13 +28,19 @@ public class Server {
                 ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
                 try {
                     message = (LinkedList<String>) objectInputStream.readObject();
-                    orders = encrypter.decrypt(message);
+                    
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
                 for (String enc : message) {
                     System.out.println(enc);
                 }
+                try {
+                    orders = encrypter.decrypt(message);
+                } catch (Exception e) {
+                    System.out.println("There was a failure during decrypting");
+                }
+               
                 for (String or : orders) {
                     System.out.println(or);
                 }
