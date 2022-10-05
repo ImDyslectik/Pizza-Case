@@ -10,8 +10,9 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public interface encrypter {
-    final String ALGORITHM = "AES"; 
+    final String ALGORITHM = "AES";
     final String secretKey = "Dyslecthick";
+
     public static SecretKeySpec prepareSecreteKey(String myKey) {
         byte[] key;
         MessageDigest sha = null;
@@ -27,16 +28,18 @@ public interface encrypter {
         }
         return null;
     }
-    public static LinkedList<String> encryptList(LinkedList<String> order){
+
+    public static LinkedList<String> encryptList(LinkedList<String> order) {
         LinkedList<String> result = new LinkedList<>();
         for (String string : order) {
-            String Sencrypted = encrypt(string, secretKey );
+            String Sencrypted = encrypt(string, secretKey);
             result.addLast(Sencrypted);
         }
         return result;
-        
+
     }
-    public static  String encrypt(String strToEncrypt, String secret) {
+
+    public static String encrypt(String strToEncrypt, String secret) {
         try {
             SecretKeySpec secretKey = prepareSecreteKey(secret);
             Cipher cipher = Cipher.getInstance(ALGORITHM);
@@ -48,15 +51,16 @@ public interface encrypter {
         return null;
     }
 
-    public static LinkedList<String> decryptList(LinkedList<String> order){
+    public static LinkedList<String> decryptList(LinkedList<String> order) {
         LinkedList<String> result = new LinkedList<>();
         for (String string : order) {
-            String Decrypted = decrypt(string, secretKey );
+            String Decrypted = decrypt(string, secretKey);
             result.addLast(Decrypted);
         }
         return result;
-        
+
     }
+
     public static String decrypt(String strToDecrypt, String secret) {
         try {
             SecretKeySpec secretKey = prepareSecreteKey(secret);

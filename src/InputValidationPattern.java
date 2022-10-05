@@ -12,17 +12,12 @@ public class InputValidationPattern {
      * @return
      */
     public boolean Validator(String Name, String StreetName, String PostalAdress, String PizzaAmount) {
-        if (Name.isEmpty() || StreetName.isEmpty()) {
-            System.out.println("het lijkt erop dat u iets leeg gelaten heeft");
-            return false;
-
+        if (Name.matches("[a-zA-Z]+") && StreetName.matches("[a-zA-Z]+")
+                && PostalAdress.matches("[1-9]{1}[0-9]{3}[a-zA-Z]{2}") && PizzaAmount.matches("[1-99]")) {
+            return true;
         } else {
-            if (PostalAdress.matches("[1-9]{1}[0-9]{3}[a-zA-Z]{2}") && PizzaAmount.matches("[1-99]")) {
-                return true;
-            }
             System.out.println("Het lijkt erop dat uw gegevens niet geldig zijn, probeer het nogmaals: ");
             return false;
         }
     }
-
 }

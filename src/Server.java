@@ -7,7 +7,6 @@ public class Server {
     private static Server instance;
     private Socket socket = null;
     private ServerSocket server = null;
-    private DataInputStream in = null;
     LinkedList<String> orders = new LinkedList<>();
     LinkedList<String> rawinput = new LinkedList<>();
 
