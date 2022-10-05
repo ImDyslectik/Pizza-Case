@@ -5,13 +5,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Base64;
-
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 
 public interface encrypter {
     final String ALGORITHM = "AES";
     final String secretKey = "Dyslecthick";
+
+    /**
+     * 
+     * @param myKey
+     * @return
+     */
 
     public static SecretKeySpec prepareSecreteKey(String myKey) {
         byte[] key;
@@ -29,6 +34,11 @@ public interface encrypter {
         return null;
     }
 
+    /**
+     * 
+     * @param order
+     * @return
+     */
     public static LinkedList<String> encryptList(LinkedList<String> order) {
         LinkedList<String> result = new LinkedList<>();
         for (String string : order) {
@@ -36,9 +46,14 @@ public interface encrypter {
             result.addLast(Sencrypted);
         }
         return result;
-
     }
 
+    /**
+     * 
+     * @param strToEncrypt
+     * @param secret
+     * @return
+     */
     public static String encrypt(String strToEncrypt, String secret) {
         try {
             SecretKeySpec secretKey = prepareSecreteKey(secret);
@@ -51,6 +66,11 @@ public interface encrypter {
         return null;
     }
 
+    /**
+     * 
+     * @param order
+     * @return
+     */
     public static LinkedList<String> decryptList(LinkedList<String> order) {
         LinkedList<String> result = new LinkedList<>();
         for (String string : order) {
@@ -58,9 +78,14 @@ public interface encrypter {
             result.addLast(Decrypted);
         }
         return result;
-
     }
 
+    /**
+     * 
+     * @param strToDecrypt
+     * @param secret
+     * @return
+     */
     public static String decrypt(String strToDecrypt, String secret) {
         try {
             SecretKeySpec secretKey = prepareSecreteKey(secret);
