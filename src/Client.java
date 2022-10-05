@@ -9,8 +9,9 @@ public class Client {
     private DataOutputStream out = null;
 
     // constructor to put ip address and port
+    // establish a connection
+
     public Client(String address, int port) {
-        // establish a connection
         try {
             while (true) {
                 socket = new Socket(address, port);
@@ -18,7 +19,7 @@ public class Client {
                 OrderManager MyOrder = new OrderManager();
                 MyOrder.Bestel();
                 LinkedList<String> get = MyOrder.getOrder();
-                LinkedList<String> message = encrypter.encrypt(get);
+                LinkedList<String> message = Encrypter.encrypt(get);
                 // takes input from terminal, this needs to be changed to input from the GUI
 
                 OutputStream outputStream = socket.getOutputStream();
@@ -37,17 +38,6 @@ public class Client {
             } catch (IOException i) {
                 System.out.println(i);
             }
-        }
-    }
-
-    // close the connection
-    public void close() {
-        try {
-            input.close();
-            out.close();
-            socket.close();
-        } catch (IOException i) {
-            System.out.println(i);
         }
     }
 }

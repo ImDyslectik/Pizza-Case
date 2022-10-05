@@ -9,10 +9,15 @@ public class Server {
     private ServerSocket server = null;
     private DataInputStream in = null;
     LinkedList<String> orders = new LinkedList<>();
-    LinkedList<String> message = new LinkedList<>();
+    LinkedList<String> rawinput = new LinkedList<>();
 
-    // constructor for the singleton
-    // starts server and waits for a connection with the client
+    /**
+     * constructor for the singleton
+     * starts server and waits for a connection with the client
+     * 
+     * @param port is passed on from Main.java containing the port where the Server,
+     *             And the Client will be run on
+     */
     public Server(int port) {
         try {
 
@@ -27,20 +32,16 @@ public class Server {
                 InputStream inputStream = socket.getInputStream();
                 ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
                 try {
-                    message = (LinkedList<String>) objectInputStream.readObject();
-                    
+                    rawinput = (LinkedList<String>) objectInputStream.readObject();
+
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
-                for (String enc : message) {
-                    System.out.println(enc);
-                }
                 try {
-                    orders = encrypter.decrypt(message);
+                    orders = Encrypter.decrypt(rawinput);
                 } catch (Exception e) {
                     System.out.println("There was a failure during decrypting");
                 }
-               
                 for (String or : orders) {
                     System.out.println(or);
                 }
@@ -63,10 +64,5 @@ public class Server {
             instance = new Server(port);
         }
         return instance;
-    }
-
-    // close socket, terminating the connection
-    public void close() {
-
     }
 }

@@ -1,24 +1,18 @@
-
 import java.io.*;
-import java.lang.reflect.Array;
 import java.util.*;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 import Compound.OrderingVisitor;
 import Compound.Pizza;
 import Compound.PizzaCompound;
 import Compound.Toppings;
 
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-
 class OrderManager {
     private String Name;
     private String StreetName;
     private String PostalAdress;
-    private String PizzaName;
-    private int PizzaAmount;
-    private int Toppingamount;
-    private String ToppingName;
+    private String PizzaAmount;
     DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     LocalDateTime Date = LocalDateTime.now();
     Console cnsl = System.console();
@@ -27,6 +21,15 @@ class OrderManager {
     PizzaCompound compound = new PizzaCompound();
     Toppings topping = new Toppings();
     LinkedList<String> compoundresult = new LinkedList<>();
+
+    /**
+     * TODO remove scanner
+     * Creates the inputvalidator that gives back either true or false depending on
+     * the input provided
+     * 
+     * IsValid set to true on starting, once false stop the loop and finish ordering
+     * kevin spul
+     */
 
     public void Bestel() {
         try (Scanner myInput = new Scanner(System.in)) {
@@ -44,34 +47,46 @@ class OrderManager {
                 System.out.println("Enter Postal Adress : ");
                 PostalAdress = cnsl.readLine();
                 System.out.println("Enter Pizza Amount : ");
-                PizzaAmount = myInput.nextInt();
-                IsValid = Input.Validator(Name, StreetName, PostalAdress);
+                PizzaAmount = cnsl.readLine();
+                IsValid = Input.Validator(Name, StreetName, PostalAdress, PizzaAmount);
             } while (IsValid != true);
         }
 
     }
 
+    /**
+     * Combines the input of the console readlines into an order
+     * Parameters are pretty self explanitory
+     * 
+     * @param Name
+     * @param StreetName
+     * @param PostalAdress
+     * @param PizzaAmount
+     * @param order          ( de topping fix effe betere naam kevin)
+     * @param ToppingCounter
+     * @param Date
+     * @return Receipt ( the linkedlist with the entire order)
+     */
+
     public LinkedList<String> getOrder() {
-        LinkedList<String> Gegevens = new LinkedList<String>();
-        // Gegevens.addLast(
-                // Name + "\n" + StreetName + "\n" + PostalAdress + "\n" + compoundresult.get(0) + "\n" + PizzaAmount);
-        Gegevens.addLast(Name);
-        Gegevens.addLast(StreetName);
-        Gegevens.addLast(PostalAdress);
-        Gegevens.addLast(compoundresult.get(0));
-        Gegevens.addLast(""+PizzaAmount);
+        LinkedList<String> Receipt = new LinkedList<String>();
+        Receipt.addLast(Name);
+        Receipt.addLast(StreetName);
+        Receipt.addLast(PostalAdress);
+        Receipt.addLast(compoundresult.get(0));
+        Receipt.addLast(PizzaAmount);
         boolean first = true;
         int toppingcounter = 0;
         for (String order : compoundresult) {
             if (first == true) {
                 first = false;
             } else {
-                Gegevens.addLast(order);
+                Receipt.addLast(order);
                 toppingcounter++;
             }
         }
-        Gegevens.addLast(""+toppingcounter);
-        Gegevens.addLast(dtf.format(Date));
-        return Gegevens;
+        Receipt.addLast("" + toppingcounter);
+        Receipt.addLast(dtf.format(Date));
+        return Receipt;
     }
 }
