@@ -13,7 +13,7 @@ public class Client {
 
     public Client(String address, int port) {
         try {
-            while (true) {
+
                 socket = new Socket(address, port);
                 System.out.println("Connected");
                 OrderManager MyOrder = new OrderManager();
@@ -25,15 +25,13 @@ public class Client {
                 OutputStream outputStream = socket.getOutputStream();
                 ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
                 objectOutputStream.writeObject(message);
-            }
+            
         } catch (UnknownHostException u) {
             System.out.println("Unknown host,zet je internet effe aan ofzo");
         } catch (IOException i) {
             System.out.println("There is a failure during reading, writing");
         } finally {
             try {
-                input.close();
-                out.close();
                 socket.close();
             } catch (IOException i) {
                 System.out.println(i);

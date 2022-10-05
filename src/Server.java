@@ -20,10 +20,9 @@ public class Server {
      */
     public Server(int port) {
         try {
-
+            server = new ServerSocket(port);
+            System.out.println("Server Booting Up Awaiting Connection");
             while (true) {
-                server = new ServerSocket(port);
-                System.out.println("Server Booting Up Awaiting Connection");
 
                 socket = server.accept();
                 System.out.println("Connected Succesfull");
@@ -53,7 +52,6 @@ public class Server {
             System.out.println("There is a failure during reading, writing");
         } finally {
             try {
-                in.close();
                 socket.close();
             } catch (IOException i) {
                 System.out.println(i);
