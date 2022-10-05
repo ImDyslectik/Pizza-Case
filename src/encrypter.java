@@ -1,32 +1,71 @@
 import java.util.LinkedList;
 import java.util.*;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.Base64;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+
 public interface encrypter {
-    
-    public static LinkedList<String> encrypt(LinkedList<String> order){
+    final String ALGORITHM = "AES"; 
+    final String secretKey = "Dyslecthick";
+    public static SecretKeySpec prepareSecreteKey(String myKey) {
+        byte[] key;
+        MessageDigest sha = null;
+        try {
+            key = myKey.getBytes(StandardCharsets.UTF_8);
+            sha = MessageDigest.getInstance("SHA-1");
+            key = sha.digest(key);
+            key = Arrays.copyOf(key, 16);
+            SecretKeySpec secretKey = new SecretKeySpec(key, ALGORITHM);
+            return secretKey;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+    public static LinkedList<String> encryptList(LinkedList<String> order){
         LinkedList<String> result = new LinkedList<>();
         for (String string : order) {
-            char[] ch = string.toCharArray();
-            for (int i = 0; i < ch.length; i ++) {
-             ch[i] = ch[i] += i + 2;
-            }
-            String Sencrypted = String.valueOf(ch);
+            String Sencrypted = encrypt(string, secretKey );
             result.addLast(Sencrypted);
         }
         return result;
         
     }
+    public static  String encrypt(String strToEncrypt, String secret) {
+        try {
+            SecretKeySpec secretKey = prepareSecreteKey(secret);
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            cipher.init(Cipher.ENCRYPT_MODE, secretKey);
+            return Base64.getEncoder().encodeToString(cipher.doFinal(strToEncrypt.getBytes("UTF-8")));
+        } catch (Exception e) {
+            System.out.println("Error while encrypting: " + e.toString());
+        }
+        return null;
+    }
 
-    public static LinkedList<String> decrypt(LinkedList<String> order){
+    public static LinkedList<String> decryptList(LinkedList<String> order){
         LinkedList<String> result = new LinkedList<>();
         for (String string : order) {
-            char[] ch = string.toCharArray();
-            for (int i = 0; i < ch.length; i ++) {
-             ch[i] = ch[i] -= i + 2;
-            }
-            String Decrypted = String.valueOf(ch);
+            String Decrypted = decrypt(string, secretKey );
             result.addLast(Decrypted);
         }
         return result;
         
+    }
+    public static String decrypt(String strToDecrypt, String secret) {
+        try {
+            SecretKeySpec secretKey = prepareSecreteKey(secret);
+            Cipher cipher = Cipher.getInstance(ALGORITHM);
+            cipher.init(Cipher.DECRYPT_MODE, secretKey);
+            return new String(cipher.doFinal(Base64.getDecoder().decode(strToDecrypt)));
+        } catch (Exception e) {
+            System.out.println("Error while decrypting: " + e.toString());
+        }
+        return null;
     }
 }

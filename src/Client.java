@@ -19,7 +19,7 @@ public class Client {
                 OrderManager MyOrder = new OrderManager();
                 MyOrder.Bestel();
                 LinkedList<String> get = MyOrder.getOrder();
-                LinkedList<String> message = Encrypter.encrypt(get);
+                LinkedList<String> message = encrypter.encryptList(get);
                 // takes input from terminal, this needs to be changed to input from the GUI
 
                 OutputStream outputStream = socket.getOutputStream();

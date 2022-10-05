@@ -38,9 +38,12 @@ public class Server {
                     e.printStackTrace();
                 }
                 try {
-                    orders = Encrypter.decrypt(rawinput);
+                    orders = encrypter.decryptList(rawinput);
                 } catch (Exception e) {
                     System.out.println("There was a failure during decrypting");
+                }
+                for (String raw : rawinput) {
+                    System.out.println(raw);
                 }
                 for (String or : orders) {
                     System.out.println(or);
