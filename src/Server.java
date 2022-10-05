@@ -22,11 +22,9 @@ public class Server {
             server = new ServerSocket(port);
             System.out.println("Server Booting Up Awaiting Connection");
             while (true) {
-
                 socket = server.accept();
                 System.out.println("Connected Succesfull");
 
-                // takes input from the client terminal and prints it into the server terminal
                 InputStream inputStream = socket.getInputStream();
                 ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
                 try {
@@ -40,9 +38,9 @@ public class Server {
                 } catch (Exception e) {
                     System.out.println("There was a failure during decrypting");
                 }
-                for (String raw : rawinput) {
-                    System.out.println(raw);
-                }
+                // for (String raw : rawinput) {
+                // System.out.println(raw);
+                // }
                 for (String or : orders) {
                     System.out.println(or);
                 }
@@ -58,7 +56,14 @@ public class Server {
         }
     }
 
-    // creates an instance of a server to initialize once because of the singelton
+    /**
+     * Makes an singleton instance of the server since it would only be needing to
+     * run once
+     * https://refactoring.guru/design-patterns/singleton
+     * 
+     * @param port gets the port from main where the server will be run on
+     * @returns an instance of the server if there are no other servers running
+     */
     public static Server getInstance(int port) {
         if (instance == null) {
             instance = new Server(port);

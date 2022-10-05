@@ -2,7 +2,6 @@ import java.io.*;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
-
 import Compound.OrderingVisitor;
 import Compound.Pizza;
 import Compound.PizzaCompound;
@@ -23,7 +22,6 @@ class OrderManager {
     LinkedList<String> compoundresult = new LinkedList<>();
 
     /**
-     * TODO remove scanner
      * Creates the inputvalidator that gives back either true or false depending on
      * the input provided
      * 
@@ -32,26 +30,23 @@ class OrderManager {
      */
 
     public void Bestel() {
-        try (Scanner myInput = new Scanner(System.in)) {
-            InputValidationPattern Input = new InputValidationPattern();
-            boolean IsValid = true;
-            compound.add(pizzaorder);
-            compound.add(topping);
-            visitor.getOrder(compound);
-            compoundresult = compound.getContent();
-            do {
-                System.out.println("Enter Name : ");
-                Name = cnsl.readLine();
-                System.out.println("Enter Streetname : ");
-                StreetName = cnsl.readLine();
-                System.out.println("Enter Postal Adress : ");
-                PostalAdress = cnsl.readLine();
-                System.out.println("Enter Pizza Amount : ");
-                PizzaAmount = cnsl.readLine();
-                IsValid = Input.Validator(Name, StreetName, PostalAdress, PizzaAmount);
-            } while (IsValid != true);
-        }
-
+        InputValidationPattern Input = new InputValidationPattern();
+        boolean IsValid = true;
+        compound.add(pizzaorder);
+        compound.add(topping);
+        visitor.getOrder(compound);
+        compoundresult = compound.getContent();
+        do {
+            System.out.println("Enter Name : ");
+            Name = cnsl.readLine();
+            System.out.println("Enter Streetname : ");
+            StreetName = cnsl.readLine();
+            System.out.println("Enter Postal Adress : ");
+            PostalAdress = cnsl.readLine();
+            System.out.println("Enter Pizza Amount : ");
+            PizzaAmount = cnsl.readLine();
+            IsValid = Input.Validator(Name, StreetName, PostalAdress, PizzaAmount);
+        } while (IsValid != true);
     }
 
     /**
